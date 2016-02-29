@@ -1,0 +1,15 @@
+<apex:page standardController="UsuarioSeguro__c" extensions="controladorDatacredito" id="pagina"  >
+   
+  <apex:form >
+     <apex:actionFunction name="NombreFuncion"  rerender="pagina" />
+       <apex:inputText value="{!documento}"/>
+           <p id='ocultar' rendered="ocultar" > {!corroborar} </p>
+           
+      <apex:commandButton value="Enviar" action="{!RealizarFlujoDeTrabajo}"  onclick="NombreFuncion()"/> 
+  
+  </apex:form>
+
+  
+  
+  
+</apex:page>

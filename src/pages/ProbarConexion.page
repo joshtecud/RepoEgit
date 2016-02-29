@@ -1,0 +1,5 @@
+<apex:page >
+<script type="text/javascript" src="/js/functions.js"></script>
+<script src="/soap/ajax/17.0/connection.js"></script>
+<script src="/soap/ajax/17.0/apex.js" type="text/javascript"></script>
+</apex:page>

@@ -1,0 +1,22 @@
+<apex:page standardController="Account">
+
+<apex:form >
+<!-- <APEX:PageBlock title="Hello {!$User.FirstName}!" > -->
+<APEX:PageBlock title="Hello{!account.name}!" >
+    <p>Estas viendo la cuenta {!account.name}.</p>
+   
+  <!-- Begin Default Content REMOVE THIS -->
+  <!--<h1>Congratulations</h1>-->
+  <!--This is your new Page-->
+  <!-- End Default Content REMOVE THIS -->
+  
+      <p><apex:inputField value="{!account.name}"/></p>
+      <p><apex:inputField value="{!account.type}"/></p>
+     <p> <apex:inputField value="{!account.Fecha_Cuenta__c}"/></p>
+     <p> <apex:inputField value="{!account.phone}"/></p>
+     <p><apex:commandButton action="{!save}" value="guardar el nuevo nombre de la cuenta"/></p>
+  
+  </APEX:PageBlock>
+  </apex:form>
+   <apex:relatedList list="Contacts"/>
+</apex:page>

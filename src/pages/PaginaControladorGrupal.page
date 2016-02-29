@@ -1,0 +1,20 @@
+<apex:page docType="html-5.0" controller="ControladorGrupal" id="pagina">
+	
+	<apex:form >
+     <apex:actionFunction name="NombreFuncion" action="enviar" />
+       <apex:inputText value="{!nombre}"/>
+       <apex:inputText value="{!cedula}"/>
+       <apex:input type="date" value="{!fecha}"/>
+	   <!-- <input type="date" value="{!fecha}" > </input> -->
+       <!--<apex:param value="{!fecha}"/> -->
+       <p id='ocultar' rendered="ocultar" > {!corroborar} </p>
+           
+      <apex:commandButton value="Enviar" action="{!probarfecha}"  onclick="NombreFuncion()"/> 
+  
+  </apex:form>
+	
+	 <apex:outputText value="{!nombre}"> </apex:outputText>
+	 <apex:outputText value="{!cedula}">  </apex:outputText>
+ <apex:outputText value="{0, date, MMMM d',' yyyy}"> <apex:param value="{!fecha}" /> </apex:outputText>
+	
+</apex:page>

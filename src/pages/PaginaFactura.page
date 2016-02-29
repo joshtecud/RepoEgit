@@ -1,0 +1,60 @@
+<apex:page standardController="FacturaE__c" extensions="controladpr">
+    <apex:form >
+    <apex:pageBlock title="Factura"> 
+        <apex:pageBlockSection title="Detalles">
+        <p> <apex:inputField value="{!FacturaE__c.name}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Fecha__c}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Cliente__c}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Cantidad_de_Items__c}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Total_venta__c}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Estado__c}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Aprobador__c}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Departamento__c}"/></p>
+        <p> <apex:inputField value="{!FacturaE__c.Ciudad__c}"/></p>
+        
+        </apex:pageBlockSection>
+         </apex:pageBlock>
+         <apex:repeat value="{!lstcuentas}"  var="cuenta">
+           {!cuenta.name}<br></br>
+         
+         </apex:repeat>
+         
+         
+        <apex:pageBlock title="Listas Relacionadas">
+            <apex:selectList value="{!ValorSeleccionadorPrincipal}" size="1" id="animales_tipos" onchange="noimporta()"> <!--Se llama a onchange en actionfunction-->
+                <apex:selectOptions value="{!listadepartamentos}"  >
+                  
+                
+                
+                </apex:selectOptions>
+                
+                    
+           
+            </apex:selectList>
+            
+            <apex:selectList value="{!ValorSeleccionadorPrincipal2}" id="cambiociudad" size="1"  >
+                <apex:actionFunction name="noimporta" action="{!cambiarlista}"  rerender="cambiociudad" /><!--rerender redibujar id lista"cambiociudad"--> 
+               
+                <apex:selectOptions value="{!listaciudades}" >
+                
+                
+                       
+                   
+                
+                
+                </apex:selectOptions>
+                
+                  
+                    
+            </apex:selectList>
+        
+        
+        </apex:pageBlock> 
+          
+          
+          
+     </apex:form>
+     
+ <apex:relatedList list="Items_factura__r"/>
+ 
+</apex:page>

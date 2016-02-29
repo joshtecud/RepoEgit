@@ -1,0 +1,145 @@
+<apex:page sidebar="false" showHeader="false" standardController="Account" >
+     
+      <apex:includeScript value="http://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&sensor=SET_TO_TRUE_OR_FALSE" />
+        
+        <style>
+            html, body { height: 30%; }
+            .page-map, .ui-content, #map-canvas { width: 100%; height:100%; padding: 0; }
+            #map-canvas { height: min-height: 100%; }
+        </style>
+        
+        <script>
+              function initialize() {
+                  var mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(4, -74)
+                  };
+                
+                  var map = new google.maps.Map(document.getElementById('map-canvas'),
+                      mapOptions);
+                }
+        
+             function loadScript() {
+                  var script = document.createElement('script');
+                  script.type = 'text/javascript';
+                  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+                      'callback=initialize';
+                  document.body.appendChild(script);
+                }
+
+window.onload = loadScript;
+                
+                
+          </script>
+
+                    <body>
+                <div id="map-canvas"></div>
+              </body>
+        
+      
+    <apex:panelGrid columns="3" id="theGrid">
+        <apex:outputText value="First" id="theFirst"/>
+        <apex:outputText value="Second" id="theSecond"/>
+        <apex:outputText value="Third" id="theThird"/>
+        <apex:outputText value="Fourth" id="theFourth"/>
+    </apex:panelGrid>
+    <apex:form >
+        <apex:pageBlock title="My Content" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+                <apex:commandButton action="{!save}" value="Save"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="My Content Section" columns="2">
+                <apex:inputField value="{!account.name}"/>
+                <apex:inputField value="{!account.site}"/>
+                <apex:inputField value="{!account.type}"/>
+                <apex:inputField value="{!account.accountNumber}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+        <apex:pageBlock title="A Block Title">
+            <apex:pageBlockSection title="A Section Title">
+                I'm three components deep!
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="A New Section">
+                This is another section.
+            </apex:pageBlockSection>
+
+    </apex:pageBlock>
+    
+        {! $User.FirstName}
+        <br/>
+        <br/>
+        {! $User.firstname & ' ' & $User.lastname}
+                <p> Today's Date is {! TODAY()} </p>
+                <p> Next week it will be {! TODAY() + 7} </p>
+                <p>The year today is {! YEAR(TODAY())}</p>
+                <p>Tomorrow will be day number {! DAY(TODAY() + 1)}</p>
+                <p>Let's find a maximum: {! MAX(1,2,3,4,5,6,5,4,3,2,1)} </p>
+                <p>The square root of 49 is {! SQRT(49)}</p>
+                <p>Is it true? {! CONTAINS('salesforce.com', 'force.com')}</p>
+        <!-- Condicional If(condición,valor si si,valor si no) -->
+        {! IF ( CONTAINS('salesforce.com','casa'), 'Yep', 'Nah') }
+        <br/>
+        <br/>
+        {! IF ( DAY(TODAY()) > 14, 'After the 14th', 'On or before the 14th') }
+        <p>Hello {! $User.FirstName}!</p>
+        <p>You are viewing the {!account.name} account.</p>
+        {!account.name}
+        <p>Here's the owner of this account: {! account.Owner.Name}</p>
+        <apex:detail relatedList="false" />
+        <apex:relatedList list="Cases" />
+        <apex:outputField value="{!account.Name}"/>
+        <br/><br/>
+        <apex:outputField value="{!account.Owner.Name}"/>
+        <apex:pageBlock title="My Account Contacts">
+            <apex:pageBlockTable value="{!account}" var="item">
+                <apex:column value="{! item.name}"/>
+                <apex:column value="{! item.type}"/>
+                <apex:column value="{! item.CustomerPriority__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="{!account.name}">
+            <apex:outputPanel style="color:black;" id="contactDetails">
+            <apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        
+        <apex:form >
+            <apex:dataList value="{! account}" var="contact">
+            <apex:commandLink rerender="contactDetails">
+                {! contact.Name}
+            <apex:param name="cid" value="{! contact.id}"/>
+            </apex:commandLink>
+            </apex:dataList>
+        </apex:form>
+    <apex:outputLink value="http://developer.salesforce.com/">Como si fuera un Link A en html!</apex:outputLink>
+      <br/><br/>
+      Create Hyperlinks to URLs or Other Visualforce Pages
+<apex:outputLink value="{! $Page.workbook}">I am me!</apex:outputLink>
+
+        {! $Page.IdeasHome}
+        <br/><br/>
+        Sometimes you want to embed links to default actions, such as creating a new Account. Use the apex:outputLink>
+        component together with URLFOR() and the $Action global variable. For example:
+        Links para realizar alguna acción
+        <br/><br/>
+        <apex:outputLink value="{! URLFOR($Action.Account.new)}">CrearCuenta</apex:outputLink>
+        
+        <apex:form >
+            <apex:pageBlock >
+                  <apex:pageMessages />
+                <apex:pageBlockSection >
+                    <apex:inputField value="{!account.name}"/>
+                    <apex:inputField value="{!account.industry}"/>
+                    <apex:commandButton action="{!quicksave}" value="Save!"/>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:form>
+        
+       
+        
+        
+</apex:page>

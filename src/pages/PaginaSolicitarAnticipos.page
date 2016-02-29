@@ -1,0 +1,20 @@
+<apex:page standardController="SolicitarAnticipos__c" extensions="SolicitarAnticipos" id="pagina"  >
+   
+
+    <apex:form >
+    <apex:pageBlock title="Información cuentas"> 
+        <apex:pageBlockSection title="Detalles">
+        <p> <apex:inputField value="{!SolicitarAnticipos__c.Funcionario__c}"/></p>
+        <p> <apex:inputField value="{!SolicitarAnticipos__c.Justificaci_n__c}"/></p>
+        <p> <apex:inputField value="{!SolicitarAnticipos__c.MontoAnticipo__c}"/></p>
+        <p><apex:commandButton action="{!save}" value="guardar anticipos"/></p>
+      </apex:pageBlockSection>   
+   </apex:pageBlock>     
+        
+   </apex:form>
+ 
+   
+
+
+
+</apex:page>
